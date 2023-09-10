@@ -1,0 +1,37 @@
+﻿@using StarBase1.Services
+@inject IHostWindowService HostWindowService
+
+<Bar Breakpoint="Breakpoint.Desktop"
+     Background="Background.Dark"
+     ThemeContrast="ThemeContrast.Dark">
+    <BarBrand>
+        <Heading Margin="Margin.Is2" Level="HeadingLevel.H1" TextColor="TextColor.Light"
+                 style="font-family: 'CaskaydiaCove NFM SemiBold'">StarBase1</Heading>
+    </BarBrand>
+    <BarToggler/>
+    <BarMenu>
+        <BarEnd>
+            <BarItem>
+                <Button Color="Color.Info" Clicked="MinimizeWindow" Outline>
+                    <Icon Name="Icon.Minus"/>
+                </Button>
+                <Button Color="Color.Warning" Clicked="MaximizeNormalizeWindow" Outline>
+                    <Icon Name="Icon.WindowMaximize"/>
+                </Button>
+                <Button Color="Color.Danger" Clicked="CloseWindow" Outline>
+                    <Icon Name="Icon.Times"/>
+                </Button>
+            </BarItem>
+        </BarEnd>
+    </BarMenu>
+
+</Bar>
+
+@code {
+
+    private async void MinimizeWindow() => await HostWindowService.Minimize();
+
+    private async void MaximizeNormalizeWindow() => await HostWindowService.ToggleMaximizeRestore();
+
+    private async void CloseWindow() => await HostWindowService.Exit();
+}

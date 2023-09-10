@@ -394,5 +394,16 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# JetBrains Rider
+# JetBrains IDEs
+.idea/
+*.iml
+
+# When using JetBrains Rider
 *.sln.iml
+
+# Unit test results
+[TestResults]/
+
+# JustCode is a .NET coding add-in
+.JustCode
+

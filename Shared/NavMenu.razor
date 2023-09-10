@@ -1,0 +1,127 @@
+﻿<Sidebar>
+    <SidebarContent>
+        <SidebarNavigation>
+            <SidebarItem>
+                <SidebarLink To="#" Title="Dashboard">
+                    <Icon Name="Icon.Gamepad" Margin="Margin.Is3.FromEnd"/>
+                    Home
+                </SidebarLink>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink Toggled="(isOpen) => toolsSidebarSubItems.Toggle(isOpen)" IsShow>
+                    <Icon Name="IconName.Wrench" Margin="Margin.Is3.FromEnd"/>Tools
+                </SidebarLink>
+                <SidebarSubItem @ref="toolsSidebarSubItems" IsShow>
+                    <SidebarItem>
+                        <SidebarLink To="#setup/performance">Performance</SidebarLink>
+                    </SidebarItem>
+                    <SidebarItem>
+                        <SidebarLink To="#setup/system">System</SidebarLink>
+                    </SidebarItem>
+                </SidebarSubItem>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink Toggled="(isOpen) => modSidebarSubItems.Toggle(isOpen)" IsShow>
+                    <Icon Name="Icon.Atom" Margin="Margin.Is3.FromEnd"/>Mods
+                </SidebarLink>
+                <SidebarSubItem @ref="modSidebarSubItems" IsShow>
+                    <SidebarItem>
+                        <SidebarLink To="#mods/summary">Mod Summary</SidebarLink>
+                    </SidebarItem>
+                    <SidebarItem>
+                        <SidebarLink To="#mods/manage">Edit Mods</SidebarLink>
+                    </SidebarItem>
+                </SidebarSubItem>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink To="#settings">
+                    <Icon Name="Icon.Cog"
+                          Margin="Margin.Is3.FromEnd"/>
+                    Settings
+                </SidebarLink>
+                <SidebarLink Click="ShowAbout">
+                    <Icon Name="Icon.InfoCircle"
+                          Margin="Margin.Is3.FromEnd"/>
+                    About
+                </SidebarLink>
+            </SidebarItem>
+        </SidebarNavigation>
+    </SidebarContent>
+</Sidebar>
+
+
+<!-- About Modal -->
+<Modal @ref="modalRef" Closing="@OnModalClosing">
+    <ModalContent Centered>
+        <ModalHeader>
+            <ModalTitle Padding="Padding.Is1" Margin="Margin.Is1">
+                <Heading Size="HeadingSize.Is3">About</Heading>
+            </ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+            <ListGroup Padding="Padding.Is1" Margin="Margin.Is1">
+                <ListGroupItem Padding="Padding.Is1" Margin="Margin.Is1">App Name: StarBase 1</ListGroupItem>
+                <ListGroupItem Padding="Padding.Is1" Margin="Margin.Is1">Author: JohnPaul Niswonger - LemonDrop1228@github</ListGroupItem>
+                <ListGroupItem Padding="Padding.Is1" Margin="Margin.Is1">Description: This is a mod manager and performance tuning tool for the game Starfield.</ListGroupItem>
+                <ListGroupItem Padding="Padding.Is1" Margin="Margin.Is1">Version: 0.0.1</ListGroupItem>
+                <ListGroupItem Padding="Padding.Is1" Margin="Margin.Is1">Release Date: 10/10/2021</ListGroupItem>
+                <ListGroupItem Padding="Padding.Is1" Margin="Margin.Is1">License: MIT</ListGroupItem>
+                <ListGroupItem Padding="Padding.Is1" Margin="Margin.Is1">Technology: Blazor WebAssembly hosted in a WPF app.</ListGroupItem>
+            </ListGroup>
+        </ModalBody>
+        <ModalFooter>
+            <Tooltip Content="GitHub Repository">
+                <Button Color="Color.Primary" Type="ButtonType.Link" To="https://github.com/yourusername/yourrepo">
+                    <Icon Name="Icon.Code"/>
+                </Button>
+            </Tooltip>
+            <Tooltip Content="NexusMods Page">
+                <Button Color="Color.Primary" Type="ButtonType.Link" To="https://www.nexusmods.com/yourpage">
+                    <Icon Name="IconName.PuzzlePiece"/>
+                </Button>
+            </Tooltip>
+            <Tooltip Content="Donate via PayPal">
+                <Button Color="Color.Primary" Type="ButtonType.Link" To="https://www.paypal.com/donate/?business=J8UBHVFCN2EEN&no_recurring=0&item_name=StarBase+1+-+Thank+you&currency_code=USD">
+                    <Icon Name="IconName.PuzzlePiece"/>
+                </Button>
+            </Tooltip>
+            <Button Color="Color.Secondary" Clicked="@CloseModal">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThumbsUp">Close</Icon>
+            </Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+<!-- About Modal -->
+
+@code{
+
+    public SidebarSubItem toolsSidebarSubItems { get; set; }
+    public SidebarSubItem modSidebarSubItems { get; set; }
+
+    private Modal modalRef;
+
+    private bool cancelClose;
+
+    private Task ShowModal()
+    {
+        return modalRef.Show();
+    }
+
+    private Task CloseModal()
+    {
+        cancelClose = false;
+
+        return modalRef.Hide();
+    }
+
+    private Task OnModalClosing(ModalClosingEventArgs e)
+    {
+        e.Cancel = cancelClose
+                   || e.CloseReason != CloseReason.UserClosing;
+
+        return Task.CompletedTask;
+    }
+
+    private async Task ShowAbout() => await ShowModal();
+
+}

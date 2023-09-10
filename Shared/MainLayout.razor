@@ -1,0 +1,21 @@
+﻿@using Blazorise.Bulma
+@inherits LayoutComponentBase
+
+
+<Layout>
+    <LayoutHeader>
+        <TopBar/>
+    </LayoutHeader>
+    <Layout Sider>
+            <LayoutSider>
+                <LayoutSiderContent>
+                    <NavMenu/>
+                </LayoutSiderContent>
+            </LayoutSider>
+            <Layout>
+                <LayoutContent>
+                    @Body
+                </LayoutContent>
+            </Layout>
+        </Layout>
+</Layout>

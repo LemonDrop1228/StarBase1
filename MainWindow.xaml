@@ -1,0 +1,54 @@
+﻿<Window
+    x:Class="StarBase1.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:StarBase1"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+    Title="StarBase1"
+    Height="800"
+    Width="1500"
+    WindowStartupLocation="CenterScreen" 
+    WindowStyle="None" ResizeMode="CanResizeWithGrip"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <shell:WindowChrome x:Key="MyWindowChrome" 
+            CaptionHeight="5" 
+            ResizeBorderThickness="10" 
+            GlassFrameThickness="1" 
+            UseAeroCaptionButtons="False" />
+    </Window.Resources>
+    <shell:WindowChrome.WindowChrome>
+        <StaticResource ResourceKey="MyWindowChrome" />
+    </shell:WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <b:BlazorWebView
+            HostPage="wwwroot/index.html"
+            Services="{DynamicResource services}">
+            <b:BlazorWebView.RootComponents>
+                <b:RootComponent
+                    ComponentType="{x:Type local:Main}"
+                    Selector="#app"/>
+            </b:BlazorWebView.RootComponents>
+        </b:BlazorWebView>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Cursor="SizeAll" 
+                   MouseLeftButtonDown="Control_OnMouseLeftButtonDown"
+                   MouseDoubleClick="Control_OnMouseDoubleClick">Click here to Drag</Label>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,32 @@
+﻿@page "/"
+@layout MainLayout
+
+
+<ContentHost>
+    <CardDeck>
+        <Card>
+            <CardHeader>
+                Total Mod Count
+            </CardHeader>
+            <CardBody>
+                <Heading Size="HeadingSize.Is1">@totalModCount</Heading>
+            </CardBody>
+        </Card>
+        <Card>
+            <CardHeader>
+                Total Mods Active
+            </CardHeader>
+            <CardBody>
+                <Heading Size="HeadingSize.Is1">@totalModsActive</Heading>
+            </CardBody>
+        </Card>
+        <Card>
+            <CardHeader>
+                Total Mods In-Active
+            </CardHeader>
+            <CardBody>
+                <Heading Size="HeadingSize.Is1">@totalModsInactive</Heading>
+            </CardBody>
+        </Card>
+    </CardDeck>
+</ContentHost>

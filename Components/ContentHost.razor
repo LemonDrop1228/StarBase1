@@ -1,0 +1,11 @@
+﻿@namespace StarBase1.Components
+@layout MainLayout
+
+<Div Padding="Padding.Is3">
+    @ChildContent
+</Div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
