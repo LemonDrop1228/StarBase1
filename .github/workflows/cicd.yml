@@ -7,30 +7,44 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  setup:
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
-
       - name: Restore dependencies
         run: dotnet restore ./StarBase1/StarBase1.csproj
+    outputs:
+      dotnet-version: ${{ steps.setup.outputs.dotnet-version }}
 
+  build:
+    needs: setup
+    runs-on: windows-latest
+    steps:
       - name: Build
         run: dotnet build ./StarBase1/StarBase1.csproj --no-restore
 
+  test:
+    needs: build
+    runs-on: windows-latest
+    steps:
       - name: Test
         run: dotnet test ./StarBase1/StarBase1.csproj --no-build --verbosity normal
 
+  publish:
+    needs: test
+    runs-on: windows-latest
+    steps:
       - name: Publish
         run: dotnet publish ./StarBase1/StarBase1.csproj --no-build -c Release -o ./publish
 
+  release:
+    needs: publish
+    runs-on: windows-latest
+    steps:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -42,6 +56,10 @@ jobs:
           draft: false
           prerelease: false
 
+  upload:
+    needs: release
+    runs-on: windows-latest
+    steps:
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
