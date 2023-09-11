@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: '6.0.x'
       - name: Restore dependencies
-        run: dotnet restore ./StarBase1/StarBase1.csproj
+        run: dotnet restore ./StarBase1.csproj
     outputs:
       dotnet-version: ${{ steps.setup.outputs.dotnet-version }}
 
@@ -25,21 +25,21 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Build
-        run: dotnet build ./StarBase1/StarBase1.csproj --no-restore
+        run: dotnet build ./StarBase1.csproj --no-restore
 
   test:
     needs: build
     runs-on: windows-latest
     steps:
       - name: Test
-        run: dotnet test ./StarBase1/StarBase1.csproj --no-build --verbosity normal
+        run: dotnet test ./StarBase1.csproj --no-build --verbosity normal
 
   publish:
     needs: test
     runs-on: windows-latest
     steps:
       - name: Publish
-        run: dotnet publish ./StarBase1/StarBase1.csproj --no-build -c Release -o ./publish
+        run: dotnet publish ./StarBase1.csproj --no-build -c Release -o ./publish
 
   release:
     needs: publish
@@ -70,3 +70,4 @@ jobs:
           asset_path: ./publish/StarBase1.exe
           asset_name: StarBase1.exe
           asset_content_type: application/octet-stream
+
