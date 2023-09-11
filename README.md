@@ -10,14 +10,14 @@ StarBase1 is a mod manager for the game Starfield, built using Blazor WebAssembl
 
 ## Prerequisites
 
-- .NET 5.0 or later
+- .NET 6.0 SDK
 - WebView2 Runtime or Evergreen Standalone Installer
 
 ## Installation
 
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/StarBase1.git
+   git clone https://github.com/LemonDrop1228/StarBase1.git
    ```
 2. Navigate to the project directory
    ```
@@ -42,7 +42,7 @@ We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.
 
 ## License
 
-This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
 
 ## Support
 
