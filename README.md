@@ -1,6 +1,6 @@
 # StarBase1: Starfield Mod Manager
 
-StarBase1 is a mod manager for the game Starfield, built using Blazor WebAssembly (WASM) and hosted in a Windows Presentation Foundation (WPF) window using WebView2.
+StarBase1 is a mod manager for the game Starfield, built using Blazor WebAssembly (WASM) and hosted in a Windows Presentation Foundation (WPF) window using WebView2. 
 
 ## Features
 
